@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آمار جدید کرونا</title>
+    <!-- my css -->
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/slider-style.css">
+</head>
+<body>
+    <!-- site title  -->
+    <p id="site-desc">
+        <img class="live-logo" src="../static/img/live.png" alt="زنده">
+        آمار لحظه ای کرونا
+    </p>
+
+    <!-- site-logo -->
+    <img class="logo" src="../static/img/logo.png" alt="logo">
+
+    <!-- slider -->
+    <div id="slider">
+		<input type="radio" name="slider" id="slide1" checked>
+		<input type="radio" name="slider" id="slide2">
+		<input type="radio" name="slider" id="slide3">
+		<input type="radio" name="slider" id="slide4">
+		<div id="slides">
+			<div id="overflow">
+				<div class="inner">
+					<div class="slide slide_1">
+						<div class="slide-content">
+							<img src="../static/img/corona2.jpg" style="width: 50%; height: 50%; border-radius: 10px;" alt="">
+						</div>
+					</div>
+					
+					<div class="slide slide_2">
+						<div class="slide-content">
+							<h2><p class="p-cases">مبتلایان تا امروز</p></h2>
+							<p id="cases">{{ Coronavirus_Cases }}</p>
+						</div>
+					</div>
+					
+					<div class="slide slide_3">
+						<div class="slide-content">
+							<h2><p class="p-cases">فوت شدگان</p></h2>
+							<p id="death"> {{ Deaths }} </p>
+						</div>
+					</div>
+
+					<div class="slide slide_4">
+						<div class="slide-content">
+							<h2><p class="p-cases">بهبود یافتگان</p></h2>
+							<p id="recover"> {{ Recovered }} </p>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+		<div id="controls">
+		<label for="slide1"></label>
+		<label for="slide2"></label>
+		<label for="slide3"></label>
+		<label for="slide4"></label>
+		</div>
+		
+		<div id="bullets">
+		<label for="slide1"></label>
+		<label for="slide2"></label>
+		<label for="slide3"></label>
+		<label for="slide4"></label>
+		</div>
+	</div> 
+
+    <!-- plot -->
+    <img class="plot" src="{{ Plot_Src }}" alt="plot">
+    <p class="plot-title">جدیترین امار مبتلایان 10 کشور درگیر</p>
+
+    <!-- Infi-Table -->
+    <table class="corona-info">
+        <tr class="title">
+            <th>رتبه</th>
+            <th>کشورها</th>
+            <th>مبتلایان</th>
+            <th>مبتلایان جدید</th>
+            <th>فوت شدگان</th>
+            <th>فوتی های جدید</th>
+            <th>بهبودیافتگان</th>
+            <th>مبتلایان اکنون</th>
+            <th>افراد در قرنطینه</th>
+        </tr>
+		  
+	{% for i in range(Country | length) %}
+        <tr>
+            <th>{{ i + 1 }}</th>
+            <th style="color:#ffc6b3;" > {{ Country[i] }} </th>
+            <th> {{ Total_Cases[i] }} </th>
+            <th class="warning"> {{ New_Cases[i] }} </th>
+            <th> {{ Total_Deaths[i] }} </th>
+            <th class="danger"> {{ New_Deaths[i] }} </th>
+            <th class="success"> {{ Total_Recoverd[i] }} </th>
+            <th> {{ Active_Cases[i] }} </th>
+            <th> {{ Serious_Critical[i] }} </th>
+        </tr>
+	{% endfor %}
+    </table>
+
+    
+</body>
+</html>
